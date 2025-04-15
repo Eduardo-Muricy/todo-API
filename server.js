@@ -39,6 +39,19 @@ app.put('/todo/:id', async (req,res)=>{
       })
       res.status(201).json({"Message": "feito"})
   })
+  app.put('/edittodo/:id', async (req,res)=>{
+    await  prisma.user.update({
+        where:{
+            id:req.params.id
+        },
+          data:{
+            text:req.body.text,
+            category:req.body.category,
+            isCompleted:req.body.isCompleted
+          }
+      })
+      res.status(201).json({"Message": "feito"})
+  })
 
   app.delete('/todo/:id', async (req, res)=>{
      await prisma.user.delete({
